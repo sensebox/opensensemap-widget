@@ -4,23 +4,20 @@ var generalBoxDetails;
 console.log(sensebox);
 
 var WIDGET_BASE_URL = "https://sensebox.de/opensensemap-widget/";
+var REFRESH_INTERVAL = 1 * 60 * 1000;
 
-insertStylesheetWithOnloadListener("https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.11.0/metricsgraphics.css")
-.then(() => {
-    return loadJSAsync("https://unpkg.com/d3")
-})
-.then(() => {
-    return loadJSAsync("https://unpkg.com/metrics-graphics")
-})
+Promise.all([
+  insertStylesheetWithOnloadListener("https://unpkg.com/metrics-graphics/dist/metricsgraphics.css"),
+  insertStylesheetWithOnloadListener(WIDGET_BASE_URL + "style.css"),
+  loadJSAsync("https://unpkg.com/d3"),
+  loadJSAsync("https://unpkg.com/metrics-graphics")
+])
 .then(getWidgetHTML)
 .then(content => {
     widget.innerHTML = content;
     return fetchBox()
 }).then(box => {
     generalBoxDetails = box;
-    console.log(box);
-    return insertStylesheetWithOnloadListener(WIDGET_BASE_URL + "style.css", box)
-}).then(box => {
     console.log(box);
     applyStylesToWidgetWithJS(box)
     initSensorArea(box)
@@ -58,7 +55,7 @@ function getWidgetHTML() {
 function initSensorArea(sensorData) {
     var sensors = sensorData.sensors;
     if (document.querySelector("#sensors").innerHTML === "") createSensorDivs(sensors);
-    setInterval(updateCurrentSensorValues, 30000)
+    setInterval(updateCurrentSensorValues, REFRESH_INTERVAL)
 }
 
 function appendTitle(title) {
@@ -147,9 +144,9 @@ function initHistoryArea() {
                 createAndInsertOptions(sensors, select)
             }
             if (document.getElementById("history-entries").innerHTML === "") { //Für den Fall, dass man zum Tab zurückkehrt, nachdem man ihn schon einmal aufgerufen hat
-                insertOldEntries(sensorData).then(() => setInterval(checkForNewMeasurements, 30000));
+                insertOldEntries(sensorData).then(() => setInterval(checkForNewMeasurements, REFRESH_INTERVAL));
             } else {
-                setInterval(checkForNewMeasurements, 30000);
+                setInterval(checkForNewMeasurements, REFRESH_INTERVAL);
             }
         })
         .catch(err => {
