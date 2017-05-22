@@ -3,6 +3,8 @@ var sensebox = widget.getAttribute("data-sensebox-id");
 var generalBoxDetails;
 console.log(sensebox);
 
+var WIDGET_BASE_URL = "https://sensebox.de/opensensemap-widget/";
+
 insertStylesheetWithOnloadListener("https://cdnjs.cloudflare.com/ajax/libs/metrics-graphics/2.11.0/metricsgraphics.css")
 .then(() => {
     return loadJSAsync("https://unpkg.com/d3")
@@ -17,7 +19,7 @@ insertStylesheetWithOnloadListener("https://cdnjs.cloudflare.com/ajax/libs/metri
 }).then(box => {
     generalBoxDetails = box;
     console.log(box);
-    return insertStylesheetWithOnloadListener("https://ausdensk.github.io/opensensemap-widget/style.css", box)
+    return insertStylesheetWithOnloadListener(WIDGET_BASE_URL + "style.css", box)
 }).then(box => {
     console.log(box);
     applyStylesToWidgetWithJS(box)
@@ -47,11 +49,9 @@ function hasURLEnding(url, arr) {
 }
 
 function getWidgetHTML() {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "text/html");
-    return fetch(new Request("https://ausdensk.github.io/opensensemap-widget/widget.html", {
+    return fetch(new Request(WIDGET_BASE_URL + "widget.html", {
         method: "GET",
-        headers: myHeaders
+        mode: "cors"
     })).then(res => res.text())
 }
 
@@ -86,7 +86,7 @@ function setTitleFontSize(title) {
         } else {
             return "15px";
         }
-    } 
+    }
 }
 
 function shortenTitle(title) {
@@ -163,7 +163,7 @@ function createAndInsertOptions(optionArray, select) {
         var newOption = document.createElement("option");
         var currentOption = optionArray[i];
         newOption.value = currentOption._id;
-        newOption.innerHTML = currentOption.title; 
+        newOption.innerHTML = currentOption.title;
         select.appendChild(newOption)
     }
 }
