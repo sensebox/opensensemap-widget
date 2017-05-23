@@ -9,28 +9,25 @@
   </div>
 </div>
 <div class="widget">
-<ol class="widget-list" id="history">
+<ol class="widget-list" data-tab="history">
   <div class="selectwrapper">
    <select name="currentsensor" class="widgetselect" id="currentsensorhistory" onchange="fetchBox().then(insertOldEntries).then(checkForNewMeasurements)"></select>
       <div class="arrowwrapper"><div class="arrow"></div></div>
       </div>
    <div id="history-entries"></div>
 </ol>
-<ol class="widget-list" id="graph">
+<ol class="widget-list" data-tab="graph">
   <div class="selectwrapper">
       <select name="currentsensorgraph" id="currentsensorgraph" onchange="fetchBox().then(drawGraph)" class="widgetselect"></select>
       <div class="arrowwrapper"><div class="arrow"></div></div>
  </div>
  <div id="graph-target"></div>
 </ol>
-<ol class="widget-list" id="sensors"></ol>
+<ol class="widget-list selected-tab" data-tab="sensors"></ol>
 <ul class="widget-tabs">
-  <li class="widget-tab">
-    <a href="#sensors" class="widget-tab-link">Sensors</a>
-  <li class="widget-tab">
-    <a href="#history" class="widget-tab-link">History</a>
-  <li class="widget-tab">
-    <a href="#graph" class="widget-tab-link">Graph</a>
+  <li class="widget-tab selected-tab" data-tab-id="sensors">Sensors</li>
+  <li class="widget-tab" data-tab-id="history">History</li>
+  <li class="widget-tab" data-tab-id="graph">Graph</li>
 </ul>
 </div>
 <div class="widget-footer">

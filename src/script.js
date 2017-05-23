@@ -22,7 +22,10 @@ const getWidgetHTML = function getWidgetHTML() {
 const initSensorArea = function initSensorArea() {
   fetchBox().then(sensorData => {
     const sensors = sensorData.sensors;
-    if (document.querySelector('#sensors').innerHTML === '') {
+    if (
+      document.querySelector('.widget-list[data-tab="sensors"]').innerHTML ===
+      ''
+    ) {
       createSensorDivs(sensors);
     }
     setInterval(updateCurrentSensorValues, REFRESH_INTERVAL);
@@ -81,7 +84,7 @@ const fetchJSON = function fetchJSON(url) {
 };
 
 const createSensorDivs = function createSensorDivs(sensors) {
-  const sensorTab = document.querySelector('#sensors');
+  const sensorTab = document.querySelector('.widget-list[data-tab="sensors"]');
   for (const sensor of sensors) {
     const newDiv = document.createElement('div');
     newDiv.className = 'innerDiv';
@@ -393,16 +396,10 @@ const insertStylesheetWithOnloadListener = function insertStylesheetWithOnloadLi
 };
 
 const applyStylesToWidgetWithJS = function applyStylesToWidgetWithJS() {
-  const widgetLists = ['#graph', '#sensors', '#history'];
-  for (const widget of widgetLists) {
-    const currentWidgetList = document.querySelector(widget);
-    adjustMarginTopWithParentHeight(
-      document.querySelector('.widget'),
-      currentWidgetList,
-      {
-        top: 0.12
-      }
-    );
+  for (const widget of document.querySelectorAll('.widget-list[data-tab]')) {
+    adjustMarginTopWithParentHeight(document.querySelector('.widget'), widget, {
+      top: 0.12
+    });
   }
   adjustPaddingTopWithParentHeight(
     document.querySelector('.widget-header'),
@@ -472,20 +469,39 @@ const setFooterFontSize = function setFooterFontSize() {
     : '11px';
 };
 
-const initArea = function initArea() {
-  const hash = window.location.hash;
-  switch (hash) {
-    case '#graph':
+const initSelectedArea = function initSelectedArea(tabId) {
+  switch (tabId) {
+    case 'graph':
       initGraphArea();
       break;
-    case '#history':
+    case 'history':
       initHistoryArea();
       break;
-    case '#sensors':
+    case 'sensors':
       initSensorArea();
       break;
     default:
       initSensorArea();
+  }
+};
+
+const toggleTab = function toggleTab({ target }) {
+  const { tabId } = target.dataset;
+  const tab = document.querySelector(`.widget-list[data-tab="${tabId}"]`);
+
+  for (const elem of document.querySelectorAll('.selected-tab')) {
+    elem.classList.remove('selected-tab');
+  }
+
+  tab.classList.add('selected-tab');
+  target.classList.add('selected-tab');
+  initSelectedArea(tabId);
+};
+
+const initTabs = function initTabs() {
+  const tabs = document.querySelectorAll('.widget-tab');
+  for (const tab of tabs) {
+    tab.addEventListener('click', toggleTab);
   }
 };
 
@@ -498,7 +514,8 @@ Promise.all([
     widget.innerHTML = content;
 
     applyStylesToWidgetWithJS();
-    initArea();
+    initTabs();
+    initSelectedArea();
   })
   .catch(err => {
     console.log(err);
@@ -506,5 +523,3 @@ Promise.all([
       '.widget'
     ).innerHTML = `Es ist ein Fehler aufgetreten: ${err}`;
   });
-
-window.onhashchange = initArea;

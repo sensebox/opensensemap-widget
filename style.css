@@ -25,14 +25,13 @@
   display: flex;
   margin-top: 0px;
   height: 9%;
+  justify-content: center;
+  align-items: center;
 }
 
-.widget-tab,
-.widget-list:target:first-of-type ~ .widget-tabs > .widget-tab:first-child,
-.widget-list:target:nth-of-type(2) ~ .widget-tabs > .widget-tab:first-child {
-  position: relative;
-  display: flex;
-  vertical-align: top;
+.widget-tab {
+  list-style:none;
+  vertical-align: middle;
   margin-top: 3px;
   font-weight: normal;
   color: #999;
@@ -44,14 +43,11 @@
   bottom: auto;
   width: 33.33%;
   min-height: 25px;
-}
-
-.widget-tab > .widget-tab-link
-/*.widget-list:target:first-of-type ~ .widget-tabs > .widget-tab:first-child ~ .widget-tab > .widget-tab-link,
-.widget-list:target:nth-of-type(2) ~ .widget-tabs > .widget-tab:nth-child(2) ~ .widget-tab > .widget-tab-link,
-.widget-list:target:last-of-type ~ .widget-tabs > .widget-tab:last-child ~ .widget-tab > .widget-tab-link*/ {
-  margin: auto;
-  border-top: 0;
+  text-align: center;
+  line-height: 25px;
+  padding: 10px 12px;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .widget-tab + .widget-tab {
@@ -59,10 +55,7 @@
 }
 
 /* Das Ding hier hebt einen Tab hervor*/
-.widget-tab:first-child,
-.widget-list:target:first-of-type ~ .widget-tabs > .widget-tab:nth-child(2),
-.widget-list:target:nth-of-type(2) ~ .widget-tabs > .widget-tab:last-child,
-.widget-list:target:last-of-type ~ .widget-tabs > .widget-tab:first-child {
+.widget-tab.selected-tab {
   bottom: -1px;
   margin-top: 0;
   padding-bottom: 2px;
@@ -72,16 +65,6 @@
   border-top: 0;
 }
 
-.widget-tab-link {
-  position: relative;
-  min-width: 60px;
-  /*padding: 0 15px*/;
-  color: inherit;
-  text-align: center;
-  text-decoration: none;
-  border-radius: 4px 4px 0 0;
-}
-
 .widget-list {
   display: none;
   overflow-y: auto;
@@ -89,54 +72,15 @@
   height: 82%;
   position: absolute;
   width: 100%;
+  flex-direction: column;
+}
+
+.widget-list.selected-tab {
+  display: flex;
 }
 
 .widget-list > li + li {
   border-top: 1px solid #e8e8e8;
-}
-
-.widget-list:last-of-type {
-  display: block;
-}
-
-.widget-list:target {
-  display: flex;
-  flex-direction: column;
-}
-
-.widget-list:target ~ .widget-list {
-  display: none;
-}
-
-.widget-list-link {
-  display: block;
-  line-height: 18px;
-  padding: 10px 12px;
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.widget-list-link:hover {
-  background: #f7f7f7;
-}
-
-li:last-child > .widget-list-link {
-  border-radius: 0 0 3px 3px;
-}
-
-.widget-list-link > img {
-  float: left;
-  width: 32px;
-  height: 32px;
-  margin: 2px 12px 0 0;
-}
-
-.widget-list-link > span {
-  display: block;
-  font-size: 11px;
-  font-weight: normal;
-  color: #999;
 }
 
 #graph-target {
@@ -148,7 +92,7 @@ li:last-child > .widget-list-link {
   min-height: 250px;
 }
 
-#graph {
+.widget-list[data-tab="graph"] {
   padding-left: 0px;
 }
 
@@ -159,11 +103,11 @@ li:last-child > .widget-list-link {
   border-radius: 3px;
 }
 
-#history {
+.widget-list[data-tab="history"] {
   padding-left: 0px;
 }
 
-#sensors {
+.widget-list[data-tab="sensors"] {
   padding-left: 5%;
   width: 95%;
 }
