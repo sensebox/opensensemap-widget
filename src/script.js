@@ -6,8 +6,9 @@ const widget = document.querySelector('[data-sensebox-id]');
 const { senseboxId } = widget.dataset;
 
 const WIDGET_BASE_URL = 'https://sensebox.de/opensensemap-widget/';
-const REFRESH_INTERVAL = 1 * 60 * 1000;
+const REFRESH_INTERVAL = 150000; // 2.5 minutes
 const API_BASE_URL = `https://api.opensensemap.org/boxes/${senseboxId}`;
+const DEPS_BASE_URL = 'https://unpkg.com/';
 
 const getWidgetHTML = function getWidgetHTML() {
   return fetch(
@@ -257,12 +258,9 @@ const initGraphArea = function initGraphArea() {
   Promise.all([
     fetchBox(),
     insertStylesheetWithOnloadListener(
-      'https://unpkg.com/metrics-graphics@2.11.0/dist/metricsgraphics.css'
+      `${DEPS_BASE_URL}metrics-graphics@2.11.0/dist/metricsgraphics.css`
     ),
-    loadJSsync([
-      'https://unpkg.com/d3@4.9.1',
-      'https://unpkg.com/metrics-graphics@2.11.0'
-    ])
+    loadJSsync(['d3@4.9.1', 'metrics-graphics@2.11.0'])
   ])
     .then(results => {
       const [sensorData] = results;
@@ -426,7 +424,7 @@ const loadJSsync = function loadJSsync(urls) {
     const next = function() {
       const scr = document.createElement('script');
 
-      scr.src = urls[currIndex];
+      scr.src = `${DEPS_BASE_URL}${urls[currIndex]}`;
       scr.async = false;
       currIndex = currIndex + 1;
 
