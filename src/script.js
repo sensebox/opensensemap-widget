@@ -10,6 +10,14 @@ const REFRESH_INTERVAL = 150000; // 2.5 minutes
 const API_BASE_URL = `https://api.opensensemap.org/boxes/${senseboxId}`;
 const DEPS_BASE_URL = 'https://unpkg.com/';
 
+let currentInterval;
+const clearCurrentInterval = function clearCurrentInterval() {
+  if (currentInterval) {
+    clearInterval(currentInterval);
+    currentInterval = undefined;
+  }
+};
+
 const getWidgetHTML = function getWidgetHTML() {
   return fetch(
     new Request(`${WIDGET_BASE_URL}widget.html`, {
@@ -28,7 +36,8 @@ const initSensorArea = function initSensorArea() {
     ) {
       createSensorDivs(sensors);
     }
-    setInterval(updateCurrentSensorValues, REFRESH_INTERVAL);
+    clearCurrentInterval();
+    currentInterval = setInterval(updateCurrentSensorValues, REFRESH_INTERVAL);
   });
 };
 
@@ -79,8 +88,21 @@ const fetchBox = function fetchBox() {
   });
 };
 
+const fetchJSONCache = Object.create(null);
+
 const fetchJSON = function fetchJSON(url) {
-  return fetch(url).then(res => res.json());
+  if (fetchJSONCache[url] && fetchJSONCache[url].ts + 10000 > Date.now()) {
+    return Promise.resolve(fetchJSONCache[url].json);
+  }
+
+  return fetch(url).then(res => res.json()).then(json => {
+    fetchJSONCache[url] = {
+      ts: Date.now(),
+      json
+    };
+
+    return json;
+  });
 };
 
 const createSensorDivs = function createSensorDivs(sensors) {
@@ -123,11 +145,19 @@ const initHistoryArea = function initHistoryArea() {
       }
       if (document.getElementById('history-entries').innerHTML === '') {
         //Für den Fall, dass man zum Tab zurückkehrt, nachdem man ihn schon einmal aufgerufen hat
-        insertOldEntries(sensorData).then(() =>
-          setInterval(checkForNewMeasurements, REFRESH_INTERVAL)
-        );
+        insertOldEntries(sensorData).then(() => {
+          clearCurrentInterval();
+          currentInterval = setInterval(
+            checkForNewMeasurements,
+            REFRESH_INTERVAL
+          );
+        });
       } else {
-        setInterval(checkForNewMeasurements, REFRESH_INTERVAL);
+        clearCurrentInterval();
+        currentInterval = setInterval(
+          checkForNewMeasurements,
+          REFRESH_INTERVAL
+        );
       }
     })
     .catch(err => {
