@@ -1,3 +1,9 @@
+@import url("//hello.myfonts.net/count/2ef157");
+
+@font-face {font-family: 'BrixSlab-Bold';src: url('//sensebox.de/webfonts/2EF157_0_0.eot');src: url('//sensebox.de/webfonts/2EF157_0_0.eot?#iefix') format('embedded-opentype'),url('//sensebox.de/webfonts/2EF157_0_0.woff2') format('woff2'),url('//sensebox.de/webfonts/2EF157_0_0.woff') format('woff'),url('//sensebox.de/webfonts/2EF157_0_0.ttf') format('truetype');}
+
+@font-face {font-family: 'BrixSlab-Regular';src: url('//sensebox.de/webfonts/2EF157_1_0.eot');src: url('webfonts/2EF157_1_0.eot?#iefix') format('embedded-opentype'),url('//sensebox.de/webfonts/2EF157_1_0.woff2') format('woff2'),url('//sensebox.de/webfonts/2EF157_1_0.woff') format('woff'),url('//sensebox.de/webfonts/2EF157_1_0.ttf') format('truetype');}
+
 :root {
   --sensebox-color: #4EAF47;
 }
@@ -222,7 +228,7 @@ li:last-child > .widget-list-link {
   box-sizing: border-box;
   min-width: 250px;
   min-height: 250px;
-  font-family: "Times New Roman", serif;
+  font-family: BrixSlab-Regular, Helvetica, sans-serif;
 }
 
 #graph-target svg {
@@ -365,7 +371,7 @@ li:last-child > .widget-list-link {
   font-style: italic;
   font-size: 11px;
   text-decoration: underline;
-  display: flex; 
+  display: flex;
   width: 100%;
   border-top: 1px solid lightgray;
 }
@@ -383,4 +389,9 @@ li:last-child > .widget-list-link {
   -webkit-appearance: none;
   appearance: none;
   color: gray;
+}
+
+.sensorValue {
+  font-weight: bold;
+  color: #333;
 }
