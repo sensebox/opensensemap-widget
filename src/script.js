@@ -2,7 +2,7 @@
 
 'use strict';
 
-const widget = document.getElementById('sensebox-widget');
+const widget = document.querySelector('[data-sensebox-id]');
 const { senseboxId } = widget.dataset;
 
 const WIDGET_BASE_URL = 'https://sensebox.de/opensensemap-widget/';
