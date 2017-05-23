@@ -4,7 +4,7 @@ Dieses Widget kann in eine Seite angebunden werden und zeigt dann dort Informati
 auf der OpenSenseMap verzeichneten senseBox an. Um das Widget einzubinden, muss man einfach nur folgende Codezeilen
 in sein HTML-Element einfügen:
 ```html
-<div id="sensebox-widget" data-sensebox-id="..."></div>
+<div data-sensebox-id="..." style="width:400px;height:600px;"></div>
 <script src="https://sensebox.de/opensensemap-widget/script.js"></script>
 ```
 

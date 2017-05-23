@@ -5,11 +5,25 @@
   <title>openSenseMap Widget</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    code {
+      display: block;
+      white-space: pre-wrap
+    }
+  </style>
 </head>
 
 <body>
+  <h1>openSenseMap Widget for including into your website</h1>
+  <p>How to?</p>
+  <p>Find out your senseBox Id (from your url on opensensemap.org) and paste this HTML to your page.</p>
+  <code>
+&#x3C;div data-sensebox-id=&#x22;your-senseBox-Id&#x22; style=&#x22;width:400px;height:600px;&#x22;&#x3E;&#x3C;/div&#x3E;
+&#x3C;script src=&#x22;https://sensebox.de/opensensemap-widget/script.js&#x22;&#x3E;&#x3C;/script&#x3E;
+  </code>
+  <p>Here is an example:</p>
   <div data-sensebox-id="578207d56fea661300861f3b" style="width:400px;height:600px;"></div>
-  <script src="script.js"></script>
+  <script src="https://sensebox.de/opensensemap-widget/script.js"></script>
 </body>
 
 </html>
