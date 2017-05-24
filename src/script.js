@@ -10,6 +10,8 @@ const REFRESH_INTERVAL = 150000; // 2.5 minutes
 const API_BASE_URL = `https://api.opensensemap.org/boxes/${senseboxId}`;
 const DEPS_BASE_URL = 'https://unpkg.com/';
 
+const userLang = navigator.language || navigator.userLanguage;
+
 let currentInterval;
 const clearCurrentInterval = function clearCurrentInterval() {
   if (currentInterval) {
@@ -230,29 +232,69 @@ const addHistoryEntry = function addHistoryEntry(date, value, unit) {
   historyEntries.insertBefore(newDiv, historyEntries.firstChild);
 };
 
-const formatDates = function formatDates(date) {
-  const monthNames = [
-    'Januar',
-    'Februar',
-    'März',
-    'April',
-    'Mai',
-    'Juni',
-    'Juli',
-    'August',
-    'September',
-    'Oktober',
-    'November',
-    'Dezember'
-  ];
-  const day = date.getDate();
-  const monthIndex = date.getMonth();
-
-  return `${day}. ${monthNames[monthIndex]}, ${fillWithZero(date.getHours())}:${fillWithZero(date.getMinutes())}`;
+const timespanTranslations = {
+  'de-DE': {
+    prefix: 'vor',
+    s: 'Sekunden',
+    min: 'Minuten',
+    h: 'Stunden',
+    d: 'Tagen',
+    m: 'Monaten',
+    y: 'Jahren'
+  },
+  default: {
+    suffix: 'ago',
+    s: 'seconds',
+    min: 'minutes',
+    h: 'hours',
+    d: 'days',
+    m: 'months',
+    y: 'years'
+  }
 };
 
-const fillWithZero = function fillWithZero(number) {
-  return String(number).length === 1 ? `0${number}` : number;
+const getTimespanTranslation = function getTimespanTranslation(key, timespan) {
+  let strings = timespanTranslations[userLang];
+  if (!strings) {
+    strings = timespanTranslations.default;
+  }
+
+  if (strings.suffix) {
+    return `${timespan} ${strings[key]} ${strings.suffix}`;
+  }
+
+  return `${strings.prefix} ${timespan} ${strings[key]}`;
+};
+
+const formatDates = function formatDates(date) {
+  const seconds = Math.floor((new Date() - date) / 1000);
+
+  let interval = Math.floor(seconds / 31536000);
+  if (interval > 1) {
+    return getTimespanTranslation('y', interval);
+  }
+
+  interval = Math.floor(seconds / 2592000);
+  if (interval > 1) {
+    return getTimespanTranslation('m', interval);
+  }
+
+  interval = Math.floor(seconds / 86400);
+  if (interval > 1) {
+    return getTimespanTranslation('d', interval);
+  }
+
+  interval = Math.floor(seconds / 3600);
+  if (interval > 1) {
+    return getTimespanTranslation('h', interval);
+  }
+
+  interval = Math.floor(seconds / 60);
+  if (interval > 1) {
+    return getTimespanTranslation('min', interval);
+  }
+
+  return getTimespanTranslation('s', Math.floor(seconds));
 };
 
 const checkForNewMeasurements = function checkForNewMeasurements() {
