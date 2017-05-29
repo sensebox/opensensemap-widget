@@ -194,6 +194,9 @@
   border-radius: 3px;
   text-align: center;
   padding: 2px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAJFBMVEUAAABNq0ZNrkZLq0VOr0ZNrkZNr0ZNr0ZNrUdMrEhEqkROr0eBuNQ+AAAAC3RSTlMASN0a+GGTkVw/DsnlyYkAAAA9SURBVHgBjcpJDoAgAATBcV/8/381BooTCX3sVEa6ptadr+PR/ItlNbYEARAAARAg2QEEQACkAASo5EynF9JtAvZyBwMUAAAAAElFTkSuQmCC);
+  background-position: right;
+  background-repeat: no-repeat;
 }
 
 .selectlabel::after {
@@ -211,37 +214,6 @@
 #currentsensorgraph option {
   border: none;
   outline: none;
-}
-
-#graph:target {
-  display: flex;
-  flex-direction: column;
-}
-
-#history:target {
-  display: flex;
-  flex-direction: column;
-}
-
-#history:target {
-  display: flex;
-  flex-direction: column;
-}
-
-.arrowwrapper {
-  display: inline-flex;
-  width: 1em;
-  height: 100%;
-  vertical-align: middle;
-}
-
-.arrow {
-  width: 20%;
-  margin: auto;
-  border-left: .25em solid transparent;
-  border-right: .25em solid transparent;
-  border-top: .375em solid var(--sensebox-color);
-  pointer-events: none;
 }
 
 #titlearea {

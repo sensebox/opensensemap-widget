@@ -12,14 +12,12 @@
 <ol class="widget-list" data-tab="history">
   <div class="selectwrapper">
    <select name="currentsensor" class="widgetselect" id="currentsensorhistory" onchange="fetchBox().then(insertOldEntries).then(checkForNewMeasurements)"></select>
-      <div class="arrowwrapper"><div class="arrow"></div></div>
       </div>
    <div id="history-entries"></div>
 </ol>
 <ol class="widget-list" data-tab="graph">
   <div class="selectwrapper">
       <select name="currentsensorgraph" id="currentsensorgraph" onchange="fetchBox().then(drawGraph)" class="widgetselect"></select>
-      <div class="arrowwrapper"><div class="arrow"></div></div>
  </div>
  <div id="graph-target"></div>
 </ol>
