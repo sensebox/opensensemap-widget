@@ -267,7 +267,7 @@
 .questionmark p {
   text-align: center;
   font-weight: bold;
-  margin: auto;
+  margin-top: 2px;
 }
 
 .tooltip {
