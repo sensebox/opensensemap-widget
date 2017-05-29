@@ -1,8 +1,16 @@
 @import url("//hello.myfonts.net/count/2ef157");
 
-@font-face {font-family: 'BrixSlab-Bold';src: url('//sensebox.de/css/webfonts/2EF157_0_0.eot');src: url('//sensebox.de/css/webfonts/2EF157_0_0.eot?#iefix') format('embedded-opentype'),url('//sensebox.de/css/webfonts/2EF157_0_0.woff2') format('woff2'),url('//sensebox.de/css/webfonts/2EF157_0_0.woff') format('woff'),url('//sensebox.de/css/webfonts/2EF157_0_0.ttf') format('truetype');}
+@font-face {
+  font-family: 'BrixSlab-Bold';
+  src: url('//sensebox.de/css/webfonts/2EF157_0_0.eot');
+  src: url('//sensebox.de/css/webfonts/2EF157_0_0.eot?#iefix') format('embedded-opentype'),url('//sensebox.de/css/webfonts/2EF157_0_0.woff2') format('woff2'),url('//sensebox.de/css/webfonts/2EF157_0_0.woff') format('woff'),url('//sensebox.de/css/webfonts/2EF157_0_0.ttf') format('truetype');
+}
 
-@font-face {font-family: 'BrixSlab-Regular';src: url('//sensebox.de/css/webfonts/2EF157_1_0.eot');src: url('css/webfonts/2EF157_1_0.eot?#iefix') format('embedded-opentype'),url('//sensebox.de/css/webfonts/2EF157_1_0.woff2') format('woff2'),url('//sensebox.de/css/webfonts/2EF157_1_0.woff') format('woff'),url('//sensebox.de/css/webfonts/2EF157_1_0.ttf') format('truetype');}
+@font-face {
+  font-family: 'BrixSlab-Regular';
+  src: url('//sensebox.de/css/webfonts/2EF157_1_0.eot');
+  src: url('css/webfonts/2EF157_1_0.eot?#iefix') format('embedded-opentype'),url('//sensebox.de/css/webfonts/2EF157_1_0.woff2') format('woff2'),url('//sensebox.de/css/webfonts/2EF157_1_0.woff') format('woff'),url('//sensebox.de/css/webfonts/2EF157_1_0.ttf') format('truetype');
+}
 
 :root {
   --sensebox-color: #4EAF47;
@@ -12,7 +20,7 @@
   position: relative;
   padding-top: 0px;
   width: 100%;
-  height: 100%
+  height: 100%;
 }
 
 .widget-tabs {
@@ -30,7 +38,7 @@
 }
 
 .widget-tab {
-  list-style:none;
+  list-style: none;
   vertical-align: middle;
   margin-top: 3px;
   font-weight: normal;
@@ -55,6 +63,7 @@
 }
 
 /* Das Ding hier hebt einen Tab hervor*/
+
 .widget-tab.selected-tab {
   bottom: -1px;
   margin-top: 0;
@@ -180,10 +189,6 @@
   height: 100%;
 }
 
-.mg-chart-title {
-  color: grey;
-}
-
 .widgetselect {
   background-color: white;
   color: green;
@@ -197,18 +202,6 @@
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAJFBMVEUAAABNq0ZNrkZLq0VOr0ZNrkZNr0ZNr0ZNrUdMrEhEqkROr0eBuNQ+AAAAC3RSTlMASN0a+GGTkVw/DsnlyYkAAAA9SURBVHgBjcpJDoAgAATBcV/8/381BooTCX3sVEa6ptadr+PR/ItlNbYEARAAARAg2QEEQACkAASo5EynF9JtAvZyBwMUAAAAAElFTkSuQmCC);
   background-position: right;
   background-repeat: no-repeat;
-}
-
-.selectlabel::after {
-  position: absolute;
-  top: 1.25em;
-  width: 0;
-  height: 0;
-  padding: 0;
-  content: '';
-  border-left: .25em solid transparent;
-  border-right: .25em solid transparent;
-  border-top: .375em solid var(--sensebox-color);
 }
 
 #currentsensorgraph option {
@@ -262,7 +255,7 @@
   font-size: 14px;
 }
 
-.questionmark:hover ~ .tooltip, #titlearea:hover ~ .titletooltip {
+.questionmark:hover ~ .tooltip,#titlearea:hover ~ .titletooltip {
   visibility: visible;
 }
 
@@ -294,7 +287,7 @@
 
 .widget-footer a {
   padding-left: 5%;
-  line-height:  0;
+  line-height: 0;
   margin: auto 0;
   vertical-align: middle;
   padding-bottom: 2px;
