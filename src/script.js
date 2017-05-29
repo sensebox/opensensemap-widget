@@ -373,7 +373,7 @@ const drawGraph = function drawGraph(sensorObject) {
       data = MG.convert.date(
         data,
         'createdAt',
-        d3.utcParse('%Y-%m-%dT%H:%M:%S.%LZ')
+        d3.utcParse('%Y-%m-%dT%H:%M:%S.%L%Z')
       );
       MG.data_graphic({
         data: data,
@@ -513,16 +513,15 @@ const loadJSsync = function loadJSsync(urls) {
 };
 
 const reduceAmountOfDrawnData = function reduceAmountOfDrawnData(data) {
-  let resarr = [];
-  if (data.length >= 1000) {
-    const dataLengthString = String(data.length);
-    const steps =
-      dataLengthString.substring(0, dataLengthString.length - 3) * 2;
-    for (let i = 0; i < data.length; i = i + steps) {
-      resarr.push(data[i]);
-    }
-  } else {
-    resarr = data;
+  if (data.length <= 1000) {
+    return data;
+  }
+
+  const resarr = [];
+  const dataLengthString = String(data.length);
+  const steps = dataLengthString.substring(0, dataLengthString.length - 3) * 2;
+  for (let i = 0; i < data.length; i = i + steps) {
+    resarr.push(data[i]);
   }
 
   return resarr;
