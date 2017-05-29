@@ -97,8 +97,6 @@
   height: 87.5%;
   padding-left: 0%;
   color: gray;
-  min-width: 275px;
-  min-height: 250px;
 }
 
 .widget-list[data-tab="graph"] {
@@ -162,7 +160,7 @@
 }
 
 .widget-header img {
-  height: 80%;
+  width: 3vw;
   padding: 10% 5% 10% 5%;
 }
 
