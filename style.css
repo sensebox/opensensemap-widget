@@ -160,7 +160,7 @@
 }
 
 .widget-header img {
-  width: 3vw;
+  max-width: 6vw;
   padding: 10% 5% 10% 5%;
 }
 
