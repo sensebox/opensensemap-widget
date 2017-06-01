@@ -12,12 +12,17 @@ const DEPS_BASE_URL = 'https://unpkg.com/';
 
 const userLang = navigator.language || navigator.userLanguage;
 
-let currentInterval;
-const clearCurrentInterval = function clearCurrentInterval() {
-  if (currentInterval) {
-    clearInterval(currentInterval);
-    currentInterval = undefined;
+const currentIntervals = {};
+const clearCurrentInterval = function clearCurrentInterval(target) {
+  if (currentIntervals[target]) {
+    clearInterval(currentIntervals[target]);
+    currentIntervals[target] = undefined;
   }
+};
+
+const startInterval = function startInterval(target, func) {
+  clearCurrentInterval(target);
+  currentIntervals[target] = setInterval(func, REFRESH_INTERVAL);
 };
 
 const getWidgetHTML = function getWidgetHTML() {
@@ -38,8 +43,6 @@ const initSensorArea = function initSensorArea() {
     ) {
       createSensorDivs(sensors);
     }
-    clearCurrentInterval();
-    currentInterval = setInterval(updateCurrentSensorValues, REFRESH_INTERVAL);
   });
 };
 
@@ -147,19 +150,7 @@ const initHistoryArea = function initHistoryArea() {
       }
       if (document.getElementById('history-entries').innerHTML === '') {
         //Für den Fall, dass man zum Tab zurückkehrt, nachdem man ihn schon einmal aufgerufen hat
-        insertOldEntries(sensorData).then(() => {
-          clearCurrentInterval();
-          currentInterval = setInterval(
-            checkForNewMeasurements,
-            REFRESH_INTERVAL
-          );
-        });
-      } else {
-        clearCurrentInterval();
-        currentInterval = setInterval(
-          checkForNewMeasurements,
-          REFRESH_INTERVAL
-        );
+        insertOldEntries(sensorData).then(() => {});
       }
     })
     .catch(err => {
@@ -587,7 +578,11 @@ Promise.all([
 
     applyStylesToWidgetWithJS();
     initTabs();
-    toggleTab({ target: document.querySelector(`[data-tab-id=${initialTab}]`) });
+    toggleTab({
+      target: document.querySelector(`[data-tab-id=${initialTab}]`)
+    });
+    startInterval('sensors', updateCurrentSensorValues);
+    startInterval('history', checkForNewMeasurements);
   })
   .catch(err => {
     console.log(err);
