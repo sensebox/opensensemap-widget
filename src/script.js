@@ -3,7 +3,7 @@
 'use strict';
 
 const widget = document.querySelector('[data-sensebox-id]');
-const { senseboxId } = widget.dataset;
+const { senseboxId, initialTab } = widget.dataset;
 
 const WIDGET_BASE_URL = 'https://sensebox.de/opensensemap-widget/';
 const REFRESH_INTERVAL = 150000; // 2.5 minutes
@@ -587,7 +587,7 @@ Promise.all([
 
     applyStylesToWidgetWithJS();
     initTabs();
-    initSelectedArea();
+    toggleTab({ target: document.querySelector(`[data-tab-id=${initialTab}]`) });
   })
   .catch(err => {
     console.log(err);

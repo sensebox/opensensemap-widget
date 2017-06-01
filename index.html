@@ -16,13 +16,13 @@
 <body>
   <h1>openSenseMap Widget for including into your website</h1>
   <p>How to?</p>
-  <p>Find out your senseBox Id (from your url on opensensemap.org) and paste this HTML to your page.</p>
+  <p>Find out your senseBox ID (from your url on opensensemap.org) and paste this HTML to your page. You may optionally specify the tab to be initially selected via the <var>data-initial-tab</var> attribute (possible values are <var>sensors</var>, <var>history</var> and <var>graph</var>)</p>
   <code>
-&#x3C;div data-sensebox-id=&#x22;your-senseBox-Id&#x22; style=&#x22;width:400px;height:600px;&#x22;&#x3E;&#x3C;/div&#x3E;
+&#x3C;div data-sensebox-id=&#x22;your-senseBox-Id&#x22; data-initial-tab=&#x22;sensors&#x22; style=&#x22;width:400px;height:600px;&#x22;&#x3E;&#x3C;/div&#x3E;
 &#x3C;script src=&#x22;https://sensebox.de/opensensemap-widget/script.js&#x22;&#x3E;&#x3C;/script&#x3E;
   </code>
   <p>Here is an example:</p>
-  <div data-sensebox-id="57fb712811347b0011c10e80" style="width:400px;height:600px;"></div>
+  <div data-sensebox-id="57fb712811347b0011c10e80" data-initial-tab="sensors" style="width:400px;height:600px;"></div>
   <script src="./script.js"></script>
 </body>
 
