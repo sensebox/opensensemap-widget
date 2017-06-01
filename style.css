@@ -105,7 +105,7 @@
 
 .selectwrapper {
   display: inline-block;
-  margin: 10px auto;
+  margin: 6px auto;
   border: 1px solid lightgray;
   border-radius: 3px;
 }
@@ -116,7 +116,7 @@
 
 .widget-list[data-tab="sensors"] {
   padding-left: 5%;
-  width: 95%;
+  width: 90%;
 }
 
 .innerDiv h3 {
@@ -125,8 +125,15 @@
   margin: 10px 0;
 }
 
+.innerDiv h3 span {
+  color: gray;
+  font-size: 14px;
+  font-weight: 300;
+  font-style: italic;
+  float: right;
+}
+
 .innerDiv p {
-  color: grey;
   margin: 5px 2px 5px 0;
 }
 
@@ -214,7 +221,7 @@
 }
 
 .questionmarkwrapper {
-  margin: auto 3%;
+  margin: auto 5%;
   display: flex;
   cursor: default;
 }

@@ -120,7 +120,7 @@ const createSensorDivs = function createSensorDivs(sensors) {
 
 const fillDiv = function fillDiv(element, data) {
   if (data.lastMeasurement) {
-    element.innerHTML = `<h3>${data.title}: </h3><p><i>${formatDates(new Date(data.lastMeasurement.createdAt))}</i>: <span class="sensorValue">${data.lastMeasurement.value} ${data.unit}</span></p>`;
+    element.innerHTML = `<h3>${data.title}: <span>${formatDates(new Date(data.lastMeasurement.createdAt))}</span></h3><p><span class="sensorValue">${data.lastMeasurement.value} ${data.unit}</span></p>`;
   } else {
     element.innerHTML = `<h3>${data.title}: </h3><p>Keine Daten verfügbar...</p>`;
   }
@@ -385,7 +385,7 @@ const drawGraph = function drawGraph(sensorObject) {
         backgroundColor: '#8C001A',
         title: `${currentSensor.title} in ${currentSensor.unit}`,
         xax_count: 3,
-        color: '#8C001A',
+        color: '#4EAF47',
         x_accessor: 'createdAt',
         y_accessor: 'value',
         max_y: setMaxGraphValue(data),
@@ -579,6 +579,7 @@ const initTabs = function initTabs() {
 Promise.all([
   getWidgetHTML(),
   insertStylesheetWithOnloadListener(`${WIDGET_BASE_URL}style.css`)
+  //insertStylesheetWithOnloadListener(`./style.css`)
 ])
   .then(results => {
     const [content] = results;
