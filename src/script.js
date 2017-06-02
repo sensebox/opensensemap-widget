@@ -4,6 +4,7 @@
 
 const widget = document.querySelector('[data-sensebox-id]');
 const { senseboxId, initialTab } = widget.dataset;
+let selectedTab;
 
 const WIDGET_BASE_URL = 'https://sensebox.de/opensensemap-widget/';
 const REFRESH_INTERVAL = 150000; // 2.5 minutes
@@ -129,13 +130,11 @@ const fillDiv = function fillDiv(element, data) {
   }
 };
 
-const updateCurrentSensorValues = function updateCurrentSensorValues() {
-  fetchBox().then(sensorData => {
-    for (const sensor of sensorData.sensors) {
-      const requiredID = `widget-sensor-${sensor._id}`;
-      fillDiv(document.getElementById(requiredID), sensor);
-    }
-  });
+const updateSensorValues = function updateSensorValues(sensorData) {
+  for (const sensor of sensorData.sensors) {
+    const requiredID = `widget-sensor-${sensor._id}`;
+    fillDiv(document.getElementById(requiredID), sensor);
+  }
 };
 
 //Der folgende Code wird nur initiiert, wenn der "History"-Button im Widget angeklickt wird.
@@ -288,33 +287,32 @@ const formatDates = function formatDates(date) {
   return getTimespanTranslation('s', Math.floor(seconds));
 };
 
-const checkForNewMeasurements = function checkForNewMeasurements() {
-  fetchBox().then(sensorData => {
-    const currentSensor = searchSensorinArray(sensorID, sensorData.sensors);
-    if (currentSensor.lastMeasurement) {
-      const parsedDate = formatDates(
-        new Date(currentSensor.lastMeasurement.createdAt)
-      );
-      const firstChild = document.getElementById('history-entries').firstChild;
+const updateHistory = function updateHistory(sensorData) {
+  const sensorID = getSelectedValue('currentsensorhistory');
+  const currentSensor = searchSensorinArray(sensorID, sensorData.sensors);
+  if (currentSensor.lastMeasurement) {
+    const parsedDate = formatDates(
+      new Date(currentSensor.lastMeasurement.createdAt)
+    );
+    const firstChild = document.getElementById('history-entries').firstChild;
+    if (
+      !firstChild ||
+      firstChild === null ||
+      !firstChild.innerHTML.startsWith(`<p><i>${parsedDate}`)
+    ) {
       if (
-        !firstChild ||
-        firstChild === null ||
-        !firstChild.innerHTML.startsWith(`<p><i>${parsedDate}`)
-      ) {
-        if (
-          firstChild &&
-          firstChild !== null &&
-          firstChild.innerHTML.startsWith('Leider')
-        )
-          firstChild.innerHTML = '';
-        addHistoryEntry(
-          parsedDate,
-          currentSensor.lastMeasurement.value,
-          currentSensor.unit
-        );
-      }
+        firstChild &&
+        firstChild !== null &&
+        firstChild.innerHTML.startsWith('Leider')
+      )
+        firstChild.innerHTML = '';
+      addHistoryEntry(
+        parsedDate,
+        currentSensor.lastMeasurement.value,
+        currentSensor.unit
+      );
     }
-  });
+  }
 };
 
 //Diese Funktionen werden aufgerufen, wenn der Graphen-Tab angeklickt wird.
@@ -540,6 +538,7 @@ const toggleTab = function toggleTab({ target }) {
 
   tab.classList.add('selected-tab');
   target.classList.add('selected-tab');
+  selectedTab = tabId;
  
   switch (tabId) {
     case 'graph':
@@ -576,8 +575,16 @@ Promise.all([
     toggleTab({
       target: document.querySelector(`[data-tab-id=${initialTab}]`)
     });
-    startInterval('sensors', updateCurrentSensorValues);
-    startInterval('history', checkForNewMeasurements);
+
+    startInterval('datarefresh', () => {
+      fetchBox().then(box => {
+        if (selectedTab === 'history')
+          updateHistory(box);
+        else if (selectedTab === 'sensors')
+          updateSensorValues(box);
+      });
+    });
+
   })
   .catch(err => {
     console.log(err);
