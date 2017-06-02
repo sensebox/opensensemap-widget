@@ -3,7 +3,8 @@
 'use strict';
 
 const widget = document.querySelector('[data-sensebox-id]');
-const { senseboxId } = widget.dataset;
+const { senseboxId, initialTab } = widget.dataset;
+let selectedTab;
 
 const WIDGET_BASE_URL = 'https://sensebox.de/opensensemap-widget/';
 const REFRESH_INTERVAL = 150000; // 2.5 minutes
@@ -12,12 +13,17 @@ const DEPS_BASE_URL = 'https://unpkg.com/';
 
 const userLang = navigator.language || navigator.userLanguage;
 
-let currentInterval;
-const clearCurrentInterval = function clearCurrentInterval() {
-  if (currentInterval) {
-    clearInterval(currentInterval);
-    currentInterval = undefined;
+const currentIntervals = {};
+const clearCurrentInterval = function clearCurrentInterval(target) {
+  if (currentIntervals[target]) {
+    clearInterval(currentIntervals[target]);
+    currentIntervals[target] = undefined;
   }
+};
+
+const startInterval = function startInterval(target, func) {
+  clearCurrentInterval(target);
+  currentIntervals[target] = setInterval(func, REFRESH_INTERVAL);
 };
 
 const getWidgetHTML = function getWidgetHTML() {
@@ -38,8 +44,6 @@ const initSensorArea = function initSensorArea() {
     ) {
       createSensorDivs(sensors);
     }
-    clearCurrentInterval();
-    currentInterval = setInterval(updateCurrentSensorValues, REFRESH_INTERVAL);
   });
 };
 
@@ -120,19 +124,17 @@ const createSensorDivs = function createSensorDivs(sensors) {
 
 const fillDiv = function fillDiv(element, data) {
   if (data.lastMeasurement) {
-    element.innerHTML = `<h3>${data.title}: </h3><p><i>${formatDates(new Date(data.lastMeasurement.createdAt))}</i>: <span class="sensorValue">${data.lastMeasurement.value} ${data.unit}</span></p>`;
+    element.innerHTML = `<h3>${data.title}: <span>${formatDates(new Date(data.lastMeasurement.createdAt))}</span></h3><p><span class="sensorValue">${data.lastMeasurement.value} ${data.unit}</span></p>`;
   } else {
     element.innerHTML = `<h3>${data.title}: </h3><p>Keine Daten verfügbar...</p>`;
   }
 };
 
-const updateCurrentSensorValues = function updateCurrentSensorValues() {
-  fetchBox().then(sensorData => {
-    for (const sensor of sensorData.sensors) {
-      const requiredID = `widget-sensor-${sensor._id}`;
-      fillDiv(document.getElementById(requiredID), sensor);
-    }
-  });
+const updateSensorValues = function updateSensorValues(sensorData) {
+  for (const sensor of sensorData.sensors) {
+    const requiredID = `widget-sensor-${sensor._id}`;
+    fillDiv(document.getElementById(requiredID), sensor);
+  }
 };
 
 //Der folgende Code wird nur initiiert, wenn der "History"-Button im Widget angeklickt wird.
@@ -147,19 +149,7 @@ const initHistoryArea = function initHistoryArea() {
       }
       if (document.getElementById('history-entries').innerHTML === '') {
         //Für den Fall, dass man zum Tab zurückkehrt, nachdem man ihn schon einmal aufgerufen hat
-        insertOldEntries(sensorData).then(() => {
-          clearCurrentInterval();
-          currentInterval = setInterval(
-            checkForNewMeasurements,
-            REFRESH_INTERVAL
-          );
-        });
-      } else {
-        clearCurrentInterval();
-        currentInterval = setInterval(
-          checkForNewMeasurements,
-          REFRESH_INTERVAL
-        );
+        insertOldEntries(sensorData);
       }
     })
     .catch(err => {
@@ -297,34 +287,32 @@ const formatDates = function formatDates(date) {
   return getTimespanTranslation('s', Math.floor(seconds));
 };
 
-const checkForNewMeasurements = function checkForNewMeasurements() {
-  fetchBox().then(sensorData => {
-    const sensorID = getSelectedValue('currentsensorhistory');
-    const currentSensor = searchSensorinArray(sensorID, sensorData.sensors);
-    if (currentSensor.lastMeasurement) {
-      const parsedDate = formatDates(
-        new Date(currentSensor.lastMeasurement.createdAt)
-      );
-      const firstChild = document.getElementById('history-entries').firstChild;
+const updateHistory = function updateHistory(sensorData) {
+  const sensorID = getSelectedValue('currentsensorhistory');
+  const currentSensor = searchSensorinArray(sensorID, sensorData.sensors);
+  if (currentSensor.lastMeasurement) {
+    const parsedDate = formatDates(
+      new Date(currentSensor.lastMeasurement.createdAt)
+    );
+    const firstChild = document.getElementById('history-entries').firstChild;
+    if (
+      !firstChild ||
+      firstChild === null ||
+      !firstChild.innerHTML.startsWith(`<p><i>${parsedDate}`)
+    ) {
       if (
-        !firstChild ||
-        firstChild === null ||
-        !firstChild.innerHTML.startsWith(`<p><i>${parsedDate}`)
-      ) {
-        if (
-          firstChild &&
-          firstChild !== null &&
-          firstChild.innerHTML.startsWith('Leider')
-        )
-          firstChild.innerHTML = '';
-        addHistoryEntry(
-          parsedDate,
-          currentSensor.lastMeasurement.value,
-          currentSensor.unit
-        );
-      }
+        firstChild &&
+        firstChild !== null &&
+        firstChild.innerHTML.startsWith('Leider')
+      )
+        firstChild.innerHTML = '';
+      addHistoryEntry(
+        parsedDate,
+        currentSensor.lastMeasurement.value,
+        currentSensor.unit
+      );
     }
-  });
+  }
 };
 
 //Diese Funktionen werden aufgerufen, wenn der Graphen-Tab angeklickt wird.
@@ -385,7 +373,7 @@ const drawGraph = function drawGraph(sensorObject) {
         backgroundColor: '#8C001A',
         title: `${currentSensor.title} in ${currentSensor.unit}`,
         xax_count: 3,
-        color: '#8C001A',
+        color: '#4EAF47',
         x_accessor: 'createdAt',
         y_accessor: 'value',
         max_y: setMaxGraphValue(data),
@@ -540,7 +528,18 @@ const setFooterFontSize = function setFooterFontSize() {
     : '11px';
 };
 
-const initSelectedArea = function initSelectedArea(tabId) {
+const toggleTab = function toggleTab({ target }) {
+  const { tabId } = target.dataset;
+  const tab = document.querySelector(`.widget-list[data-tab="${tabId}"]`);
+
+  for (const elem of document.querySelectorAll('.selected-tab')) {
+    elem.classList.remove('selected-tab');
+  }
+
+  tab.classList.add('selected-tab');
+  target.classList.add('selected-tab');
+  selectedTab = tabId;
+ 
   switch (tabId) {
     case 'graph':
       initGraphArea();
@@ -554,19 +553,6 @@ const initSelectedArea = function initSelectedArea(tabId) {
     default:
       initSensorArea();
   }
-};
-
-const toggleTab = function toggleTab({ target }) {
-  const { tabId } = target.dataset;
-  const tab = document.querySelector(`.widget-list[data-tab="${tabId}"]`);
-
-  for (const elem of document.querySelectorAll('.selected-tab')) {
-    elem.classList.remove('selected-tab');
-  }
-
-  tab.classList.add('selected-tab');
-  target.classList.add('selected-tab');
-  initSelectedArea(tabId);
 };
 
 const initTabs = function initTabs() {
@@ -586,7 +572,19 @@ Promise.all([
 
     applyStylesToWidgetWithJS();
     initTabs();
-    initSelectedArea();
+    toggleTab({
+      target: document.querySelector(`[data-tab-id=${initialTab}]`)
+    });
+
+    startInterval('datarefresh', () => {
+      fetchBox().then(box => {
+        if (selectedTab === 'history')
+          updateHistory(box);
+        else if (selectedTab === 'sensors')
+          updateSensorValues(box);
+      });
+    });
+
   })
   .catch(err => {
     console.log(err);
