@@ -150,7 +150,7 @@ const initHistoryArea = function initHistoryArea() {
       }
       if (document.getElementById('history-entries').innerHTML === '') {
         //Für den Fall, dass man zum Tab zurückkehrt, nachdem man ihn schon einmal aufgerufen hat
-        insertOldEntries(sensorData).then(() => {});
+        insertOldEntries(sensorData);
       }
     })
     .catch(err => {
@@ -290,7 +290,6 @@ const formatDates = function formatDates(date) {
 
 const checkForNewMeasurements = function checkForNewMeasurements() {
   fetchBox().then(sensorData => {
-    const sensorID = getSelectedValue('currentsensorhistory');
     const currentSensor = searchSensorinArray(sensorID, sensorData.sensors);
     if (currentSensor.lastMeasurement) {
       const parsedDate = formatDates(
@@ -531,7 +530,17 @@ const setFooterFontSize = function setFooterFontSize() {
     : '11px';
 };
 
-const initSelectedArea = function initSelectedArea(tabId) {
+const toggleTab = function toggleTab({ target }) {
+  const { tabId } = target.dataset;
+  const tab = document.querySelector(`.widget-list[data-tab="${tabId}"]`);
+
+  for (const elem of document.querySelectorAll('.selected-tab')) {
+    elem.classList.remove('selected-tab');
+  }
+
+  tab.classList.add('selected-tab');
+  target.classList.add('selected-tab');
+ 
   switch (tabId) {
     case 'graph':
       initGraphArea();
@@ -547,19 +556,6 @@ const initSelectedArea = function initSelectedArea(tabId) {
   }
 };
 
-const toggleTab = function toggleTab({ target }) {
-  const { tabId } = target.dataset;
-  const tab = document.querySelector(`.widget-list[data-tab="${tabId}"]`);
-
-  for (const elem of document.querySelectorAll('.selected-tab')) {
-    elem.classList.remove('selected-tab');
-  }
-
-  tab.classList.add('selected-tab');
-  target.classList.add('selected-tab');
-  initSelectedArea(tabId);
-};
-
 const initTabs = function initTabs() {
   const tabs = document.querySelectorAll('.widget-tab');
   for (const tab of tabs) {
@@ -570,7 +566,6 @@ const initTabs = function initTabs() {
 Promise.all([
   getWidgetHTML(),
   insertStylesheetWithOnloadListener(`${WIDGET_BASE_URL}style.css`)
-  //insertStylesheetWithOnloadListener(`./style.css`)
 ])
   .then(results => {
     const [content] = results;
