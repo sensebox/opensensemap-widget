@@ -9,14 +9,21 @@ The usage of the widget is super easy and requires just two steps
 Go to [https://opensensemap.org/](https://opensensemap.org/) and open a senseBox of your choice. Now copy the last portion of the address bar of your browser. This is your senseBox Id.
 
 ### Step 2: Insert HTML into your page
-In order to include the widget into your web page, just include the following html into your page at the desired location. **Do not include the `<script>` tag into the `<head>` tag!**
+In order to include the widget into your web page, just include the following html into your page at the desired location.
 
 Replace the `...` in the `data-sensebox-id` attribute with the senseBox Id from step 1. Do not forget the quotation marks.
 ```html
-<div data-sensebox-id="..." style="width:400px;height:600px;"></div>
-<script src="https://sensebox.de/opensensemap-widget/script.js"></script>
+<iframe
+  src="https://sensebox.github.io/opensensemap-widget/iframe.html?senseboxId=YOUR-SENSEBOX-ID"
+  width="400"
+  height="600"
+  marginwidth="8" marginheight="8"
+  hspace="0" vspace="0"
+  frameborder="0"
+  scrolling="no"
+></iframe>
 ```
-You can toy around with the height and width in the `style` attribute.
+You can play around with the `height` and `width` attributes.
 
 ## Example
 [https://sensebox.de/opensensemap-widget/](https://sensebox.de/opensensemap-widget/)
@@ -24,16 +31,22 @@ You can toy around with the height and width in the `style` attribute.
 Developed by by [ausDensk](https://github.com/ausDensk) in an internship over two weeks at senseBox.
 
 # openSenseMap-Widget
-
 Dieses Widget kann in eine Seite angebunden werden und zeigt dann dort Informationen zu einer ausgewählten,
 auf der OpenSenseMap verzeichneten senseBox an. Um das Widget einzubinden, muss man einfach nur folgende Codezeilen
 in sein HTML-Element einfügen:
 ```html
-<div data-sensebox-id="..." style="width:400px;height:600px;"></div>
-<script src="https://sensebox.de/opensensemap-widget/script.js"></script>
+<iframe
+  src="https://sensebox.github.io/opensensemap-widget/iframe.html?senseboxId=DEINE-SENSEBOXID"
+  width="400"
+  height="600"
+  marginwidth="8" marginheight="8"
+  hspace="0" vspace="0"
+  frameborder="0"
+  scrolling="no"
+></iframe>
 ```
 
-In das Feld _data-sensebox-id_ muss dann die ID der senseBox eingetragen werden, wie sie auch in der OpenSenseMap
+In der URL muss `DEINE-SENSEBOXID` durch die ID deiner Box ersetzt werden, wie sie auch in der OpenSenseMap
 gespeichert ist. Anschließend ist das Widget sofort auf der Seite verfügbar.
 
 Ein Beispiel, wie das Widget in der Praxis aussieht, kann man [hier](https://sensebox.de/opensensemap-widget/) begutachten.
