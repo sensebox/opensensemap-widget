@@ -167,8 +167,10 @@
 }
 
 .widget-header img {
-  max-width: 6vw;
-  padding: 10% 5% 10% 5%;
+  max-height: 74.1px;
+  height: 90%;
+  padding: 20px;
+  margin: auto auto auto 0;
 }
 
 .widget-wrapper {
