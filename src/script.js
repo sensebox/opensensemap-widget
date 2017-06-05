@@ -539,7 +539,7 @@ const toggleTab = function toggleTab({ target }) {
   tab.classList.add('selected-tab');
   target.classList.add('selected-tab');
   selectedTab = tabId;
- 
+
   switch (tabId) {
     case 'graph':
       initGraphArea();
@@ -573,18 +573,15 @@ Promise.all([
     applyStylesToWidgetWithJS();
     initTabs();
     toggleTab({
-      target: document.querySelector(`[data-tab-id=${initialTab}]`)
+      target: document.querySelector(`[data-tab-id=${initialTab || 'sensors'}]`)
     });
 
     startInterval('datarefresh', () => {
       fetchBox().then(box => {
-        if (selectedTab === 'history')
-          updateHistory(box);
-        else if (selectedTab === 'sensors')
-          updateSensorValues(box);
+        if (selectedTab === 'history') updateHistory(box);
+        else if (selectedTab === 'sensors') updateSensorValues(box);
       });
     });
-
   })
   .catch(err => {
     console.log(err);
