@@ -11,7 +11,7 @@ Go to [https://opensensemap.org/](https://opensensemap.org/) and open a senseBox
 ### Step 2: Insert HTML into your page
 In order to include the widget into your web page, just include the following html into your page at the desired location.
 
-Replace the `...` in the `data-sensebox-id` attribute with the senseBox Id from step 1. Do not forget the quotation marks.
+Replace the `YOUR-SENSEBOX-OD` in the `src` attribute with the senseBox Id from step 1.
 ```html
 <iframe
   src="https://sensebox.github.io/opensensemap-widget/iframe.html?senseboxId=YOUR-SENSEBOX-ID"
