@@ -12,10 +12,6 @@
   src: url('css/webfonts/2EF157_1_0.eot?#iefix') format('embedded-opentype'),url('//sensebox.de/css/webfonts/2EF157_1_0.woff2') format('woff2'),url('//sensebox.de/css/webfonts/2EF157_1_0.woff') format('woff'),url('//sensebox.de/css/webfonts/2EF157_1_0.ttf') format('truetype');
 }
 
-:root {
-  --sensebox-color: #4EAF47;
-}
-
 .widget {
   position: relative;
   padding-top: 0px;
@@ -30,11 +26,17 @@
   right: 0;
   padding: 0;
   border-radius: 3px 3px 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin-top: 0px;
   height: 9%;
-  justify-content: center;
-  align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .widget-tab {
@@ -81,10 +83,15 @@
   height: 82%;
   position: absolute;
   width: 100%;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .widget-list.selected-tab {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
 }
 
@@ -120,7 +127,7 @@
 }
 
 .innerDiv h3 {
-  color: var(--sensebox-color);
+  color: #4EAF47;
   font-size: 16px;
   margin: 10px 0;
 }
@@ -153,7 +160,7 @@
 }
 
 .innerDiv-history b {
-  color: var(--sensebox-color);
+  color: #4EAF47;
 }
 
 .innerDiv-history i {
@@ -162,6 +169,8 @@
 
 .widget-header {
   position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   height: 15%;
 }
@@ -181,11 +190,17 @@
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.07);
   position: relative;
   margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   width: 100%;
   height: 100%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   min-width: 250px;
   min-height: 250px;
   font-family: BrixSlab-Regular, Helvetica, sans-serif;
@@ -224,12 +239,14 @@
 
 .questionmarkwrapper {
   margin: auto 5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   cursor: default;
 }
 
 .questionmark {
-  background-color: var(--sensebox-color);
+  background-color: #4EAF47;
   border-radius: 100%;
   color: white;
   width: 20px;
@@ -287,6 +304,8 @@
   font-style: italic;
   font-size: 11px;
   text-decoration: underline;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   width: 100%;
   border-top: 1px solid lightgray;
