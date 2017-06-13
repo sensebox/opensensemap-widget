@@ -124,7 +124,10 @@ const createSensorDivs = function createSensorDivs(sensors) {
 
 const fillDiv = function fillDiv(element, data) {
   if (data.lastMeasurement) {
-    element.innerHTML = `<h3>${data.title}: <span>${formatDates(new Date(data.lastMeasurement.createdAt))}</span></h3><p><span class="sensorValue">${data.lastMeasurement.value} ${data.unit}</span></p>`;
+    element.innerHTML = `<h3>${data.title}: <span>${formatDates(
+      new Date(data.lastMeasurement.createdAt)
+    )}</span></h3><p><span class="sensorValue">${data.lastMeasurement
+      .value} ${data.unit}</span></p>`;
   } else {
     element.innerHTML = `<h3>${data.title}: </h3><p>Keine Daten verfügbar...</p>`;
   }
@@ -413,17 +416,6 @@ const setMinGraphValue = function setMinGraphValue(data) {
   return minimum < 0 ? minimum * 1.2 : minimum - minimum * 0.2;
 };
 
-const adjustMarginTopWithParentHeight = function adjustMarginTopWithParentHeight(
-  parent,
-  child,
-  margin
-) {
-  const elementHeight = parent.offsetHeight;
-  if (margin.top) child.style.marginTop = `${margin.top * elementHeight}px`;
-  if (margin.bottom)
-    child.style.marginBottom = `${margin.bottom * elementHeight}px`;
-};
-
 const adjustPaddingTopWithParentHeight = function adjustPaddingTopWithParentHeight(
   parent,
   child,
@@ -456,11 +448,6 @@ const insertStylesheetWithOnloadListener = function insertStylesheetWithOnloadLi
 };
 
 const applyStylesToWidgetWithJS = function applyStylesToWidgetWithJS() {
-  for (const widget of document.querySelectorAll('.widget-list[data-tab]')) {
-    adjustMarginTopWithParentHeight(document.querySelector('.widget'), widget, {
-      top: 0.12
-    });
-  }
   adjustPaddingTopWithParentHeight(
     document.querySelector('.widget-header'),
     document.querySelector('.widget-header img'),

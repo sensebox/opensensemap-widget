@@ -93,6 +93,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-top: 15%;
 }
 
 .widget-list > li + li {
