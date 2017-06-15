@@ -14,16 +14,42 @@ exports.files = {
 };
 
 exports.plugins = {
+	jscc: {
+      	values: {
+        	_ADDRESS: 'http://localhost:8000/'
+    	}
+    },
 	babel: {
 		presets: [['env', {
 			targets: {
 				browsers: ['last 2 versions']
 			},
 			useBuiltIns: true
-		}], 'babili']
+		}]]
 	}
 };
 
 exports.server = {
 	port: 8000
 }
+
+exports.overrides = {
+  production: {
+    plugins: {
+    	jscc: {
+    		values: {
+    			_ADDRESS: 'https://sensebox.de/opensensemap-widget/'
+    		}
+    	},
+    	babel: {
+    		presets: [['env', {
+    			targets: {
+    				browsers: ['last 2 versions']
+    			},
+    			useBuiltIns: true
+    		}], 'babili']
+    	}
+    }
+  }
+}
+

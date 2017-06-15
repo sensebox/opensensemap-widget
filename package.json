@@ -23,6 +23,7 @@
     "eslint": "^3.19.0",
     "eslint-config-prettier": "^2.1.1",
     "eslint-plugin-prettier": "^2.1.1",
+    "jscc-brunch": "^2.8.2",
     "prettier": "^1.3.1"
   }
 }
