@@ -1,4 +1,5 @@
 /* global d3, MG*/
+import 'babel-polyfill';
 
 'use strict';
 
@@ -6,7 +7,7 @@ const widget = document.querySelector('[data-sensebox-id]');
 const { senseboxId, initialTab } = widget.dataset;
 let selectedTab;
 
-const WIDGET_BASE_URL = 'https://sensebox.de/opensensemap-widget/';
+const WIDGET_BASE_URL = 'http://localhost:8000/';
 const REFRESH_INTERVAL = 150000; // 2.5 minutes
 const API_BASE_URL = `https://api.opensensemap.org/boxes/${senseboxId}`;
 const DEPS_BASE_URL = 'https://unpkg.com/';
