@@ -4,24 +4,24 @@ exports.modules = {
 }
 
 exports.files = {
-  javascripts: {
-    joinTo: {
-      'vendor.js': /^(?!app)/,
-      'script.js': /^app/
-    }
-  },
-  stylesheets: {joinTo: 'style.css'}
+	javascripts: {
+		joinTo: {
+	  		'vendor.js': /^(?!app)/,
+	  		'script.js': /^app/
+		}
+	},
+	stylesheets: {joinTo: 'style.css'}
 };
 
 exports.plugins = {
-  babel: {
-  	presets: [['env', {
-  		targets: {
-  			browsers: ['last 2 versions']
-  		},
-  		useBuiltIns: true
-  	}]]
-  }
+	babel: {
+		presets: [['env', {
+			targets: {
+				browsers: ['last 2 versions']
+			},
+			useBuiltIns: true
+		}], 'babili']
+	}
 };
 
 exports.server = {
