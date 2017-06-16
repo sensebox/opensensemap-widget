@@ -6260,5 +6260,3 @@ require.alias("process/browser.js", "process");process = require('process');requ
   
 });})();require('___globals___');
 
-
-//# sourceMappingURL=vendor.js.map

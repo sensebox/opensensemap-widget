@@ -26,7 +26,12 @@ exports.plugins = {
 			},
 			useBuiltIns: true
 		}]]
-	}
+	},
+	postcss: {
+    	processors: [
+      		require('autoprefixer')(['last 8 versions']),
+    	]
+  	}
 };
 
 exports.server = {
