@@ -1,0 +1,24 @@
+<!-- widget container with deafult values -->
+<div data-sensebox-id="57fb712811347b0011c10e80" style="width:100%;height:100%;"></div>
+
+<!-- bootstrap script for iframe -->
+<script type="text/javascript">
+// parse url query
+var q = {};
+var query = window.location.search.split('&');
+query.forEach(function(elem, i, arr) {
+    if (i == 0) elem = elem.slice(1); // rm the '?'
+    var prop = elem.split('=');
+    q[prop[0]] = prop[1];
+});
+
+// set values
+var widget = document.querySelector('div');
+widget.dataset.senseboxId = q.senseboxId;
+if (q.initialTab)
+  widget.dataset.initialTab = q.initialTab;
+</script>
+
+<!-- load widget content & logic -->
+<script src="./vendor.js" defer="defer"></script>
+<script src="./script.js" defer="defer"></script>

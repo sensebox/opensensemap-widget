@@ -1,0 +1,343 @@
+@import url("//hello.myfonts.net/count/2ef157");
+
+@font-face {
+  font-family: 'BrixSlab-Bold';
+  src: url('//sensebox.de/css/webfonts/2EF157_0_0.eot');
+  src: url('//sensebox.de/css/webfonts/2EF157_0_0.eot?#iefix') format('embedded-opentype'),url('//sensebox.de/css/webfonts/2EF157_0_0.woff2') format('woff2'),url('//sensebox.de/css/webfonts/2EF157_0_0.woff') format('woff'),url('//sensebox.de/css/webfonts/2EF157_0_0.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'BrixSlab-Regular';
+  src: url('//sensebox.de/css/webfonts/2EF157_1_0.eot');
+  src: url('css/webfonts/2EF157_1_0.eot?#iefix') format('embedded-opentype'),url('//sensebox.de/css/webfonts/2EF157_1_0.woff2') format('woff2'),url('//sensebox.de/css/webfonts/2EF157_1_0.woff') format('woff'),url('//sensebox.de/css/webfonts/2EF157_1_0.ttf') format('truetype');
+}
+
+.widget {
+  position: relative;
+  padding-top: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.widget-tabs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 0;
+  border-radius: 3px 3px 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  margin-top: 0px;
+  height: 9%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          -webkit-align-items: center;
+          align-items: center;
+}
+
+.widget-tab {
+  list-style: none;
+  vertical-align: middle;
+  margin-top: 3px;
+  font-weight: normal;
+  color: #999;
+  background: #fcfcfc;
+  border: solid #ddd;
+  border-width: 1px 1px 0;
+  border-radius: 5px 5px 0 0;
+  padding-bottom: 0;
+  bottom: auto;
+  width: 33.33%;
+  min-height: 25px;
+  text-align: center;
+  line-height: 25px;
+  padding: 10px 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.widget-tab + .widget-tab {
+  margin-right: -1px;
+}
+
+/* Das Ding hier hebt einen Tab hervor*/
+
+.widget-tab.selected-tab {
+  bottom: -1px;
+  margin-top: 0;
+  padding-bottom: 2px;
+  font-weight: bold;
+  color: #555;
+  background: white;
+  border-top: 0;
+}
+
+.widget-list {
+  display: none;
+  overflow-y: auto;
+  padding-bottom: 0px;
+  height: 82%;
+  position: absolute;
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          -webkit-flex-direction: column;
+          flex-direction: column;
+}
+
+.widget-list.selected-tab {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+.widget-list > li + li {
+  border-top: 1px solid #e8e8e8;
+}
+
+#graph-target {
+  width: 100%;
+  height: 87.5%;
+  padding-left: 0%;
+  color: gray;
+}
+
+.widget-list[data-tab="graph"] {
+  padding-left: 0px;
+}
+
+.selectwrapper {
+  display: inline-block;
+  margin: 6px auto;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+}
+
+.widget-list[data-tab="history"] {
+  padding-left: 0px;
+}
+
+.widget-list[data-tab="sensors"] {
+  padding-left: 5%;
+  width: 90%;
+}
+
+.innerDiv h3 {
+  color: #4EAF47;
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+.innerDiv h3 span {
+  color: gray;
+  font-size: 14px;
+  font-weight: 300;
+  font-style: italic;
+  float: right;
+}
+
+.innerDiv p {
+  margin: 5px 2px 5px 0;
+}
+
+.innerDiv-history {
+  width: 80%;
+  border: 1px solid lightgrey;
+  margin: 10px auto;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.innerDiv-history p {
+  margin-left: 2px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: grey;
+}
+
+.innerDiv-history b {
+  color: #4EAF47;
+}
+
+.innerDiv-history i {
+  color: grey;
+}
+
+.widget-header {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  height: 15%;
+}
+
+.widget-header img {
+  max-height: 74.1px;
+  height: 90%;
+  padding: 20px;
+  margin: auto auto auto 0;
+}
+
+.widget-wrapper {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.07);
+  position: relative;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          -webkit-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  min-width: 250px;
+  min-height: 250px;
+  font-family: BrixSlab-Regular, Helvetica, sans-serif;
+}
+
+#graph-target svg {
+  width: 100%;
+  height: 100%;
+}
+
+.widgetselect {
+  background-color: white;
+  color: green;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  text-align: center;
+  padding: 2px;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAJFBMVEUAAABNq0ZNrkZLq0VOr0ZNrkZNr0ZNr0ZNrUdMrEhEqkROr0eBuNQ+AAAAC3RSTlMASN0a+GGTkVw/DsnlyYkAAAA9SURBVHgBjcpJDoAgAATBcV/8/381BooTCX3sVEa6ptadr+PR/ItlNbYEARAAARAg2QEEQACkAASo5EynF9JtAvZyBwMUAAAAAElFTkSuQmCC);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+
+#currentsensorgraph option {
+  border: none;
+  outline: none;
+}
+
+#titlearea {
+  margin: auto;
+  color: #4EAF47;
+  cursor: default;
+}
+
+.questionmarkwrapper {
+  margin: auto 5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  cursor: default;
+}
+
+.questionmark {
+  background-color: #4EAF47;
+  border-radius: 100%;
+  color: white;
+  width: 20px;
+  height: 20px;
+}
+
+.questionmark p {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 2px;
+}
+
+.tooltip {
+  visibility: hidden;
+  border: 1px solid lightgrey;
+  border-radius: 3px;
+  position: absolute;
+  background-color: white;
+  z-index: 100;
+  top: 75%;
+  right: 0;
+  text-align: center;
+  max-width: 75%;
+}
+
+.tooltip p {
+  margin: 7px;
+  color: grey;
+  font-style: italic;
+  font-size: 14px;
+}
+
+.questionmark:hover ~ .tooltip,#titlearea:hover ~ .titletooltip {
+  visibility: visible;
+}
+
+.titletooltip {
+  visibility: hidden;
+  position: absolute;
+  background-color: white;
+  border: 1px solid lightgrey;
+  padding: 1px;
+  z-index: 100;
+  font-size: 12px;
+  color: grey;
+  font-style: italic;
+  text-align: center;
+  cursor: default;
+}
+
+.widget-footer {
+  height: 5%;
+  position: absolute;
+  bottom: 0;
+  font-style: italic;
+  font-size: 11px;
+  text-decoration: underline;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  width: 100%;
+  border-top: 1px solid lightgray;
+}
+
+.widget-footer a {
+  padding-left: 5%;
+  line-height: 0;
+  margin: auto 0;
+  vertical-align: middle;
+  padding-bottom: 2px;
+  display: inline;
+  cursor: pointer;
+  -moz-appearance: none;
+  -ms-progress-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  color: gray;
+}
+
+.sensorValue {
+  font-weight: bold;
+  color: #333;
+}
+
