@@ -1,6 +1,6 @@
 <div class="widget-wrapper">
 <div class="widget-header">
-  <img src="https://sensebox.de/opensensemap-widget/sblogo.svg">
+  <img src="sblogo.svg">
   <h1 id="titlearea">wird geladen&hellip;</h1>
   <span class="titletooltip"></span>
   <div class="questionmarkwrapper">
@@ -11,13 +11,13 @@
 <div class="widget">
 <ol class="widget-list" data-tab="history">
   <div class="selectwrapper">
-   <select name="currentsensor" class="widgetselect" id="currentsensorhistory" onchange="fetchBox().then(insertOldEntries).then(checkForNewMeasurements)"></select>
+   <select name="currentsensor" class="widgetselect" id="currentsensorhistory"></select>
       </div>
    <div id="history-entries"></div>
 </ol>
 <ol class="widget-list" data-tab="graph">
   <div class="selectwrapper">
-      <select name="currentsensorgraph" id="currentsensorgraph" onchange="fetchBox().then(drawGraph)" class="widgetselect"></select>
+      <select name="currentsensorgraph" id="currentsensorgraph" class="widgetselect"></select>
  </div>
  <div id="graph-target"></div>
 </ol>

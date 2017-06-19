@@ -1,5 +1,6 @@
 /* global d3, MG*/
 import 'babel-polyfill';
+import 'whatwg-fetch';
 
 'use strict';
 
@@ -563,6 +564,22 @@ const initTabs = function initTabs() {
   }
 };
 
+const changeSensorHistory = function changeSensorHistory () {
+  fetchBox()
+    .then(insertOldEntries)
+    .then(checkForNewMeasurements);
+}
+
+const changeSensorGraph = function changeSensorGraph () {
+  fetchBox()
+    .then(drawGraph);
+}
+
+const initSelectChangeListener = function initSelectChangeListener () {
+  document.getElementById('currentsensorhistory').addEventListener('change', changeSensorHistory);
+  document.getElementById('currentsensorgraph').addEventListener('change', changeSensorGraph);
+}
+
 Promise.all([
   getWidgetHTML(),
   insertStylesheetWithOnloadListener(`${WIDGET_BASE_URL}style.css`)
@@ -573,6 +590,7 @@ Promise.all([
 
     applyStylesToWidgetWithJS();
     initTabs();
+    initSelectChangeListener();
     toggleTab({
       target: document.querySelector(`[data-tab-id=${initialTab || 'sensors'}]`)
     });
