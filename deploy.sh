@@ -54,7 +54,7 @@ ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
 openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in ../super_secret.txt.enc -out super_secret.txt -d
 chmod 600 super_secret.txt
 eval `ssh-agent -s`
-ssh-add deploy_key
+ssh-add super_secret.txt
 
 # Now that we're all set up, we can push.
 git push $SSH_REPO $TARGET_BRANCH
