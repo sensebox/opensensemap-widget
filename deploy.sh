@@ -20,10 +20,9 @@ SHA=`git rev-parse --verify HEAD`
 # Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deply)
 git clone $REPO out
 cd out
+cp super_secret.txt.enc ../super_secret.txt.enc
 git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 cd ..
-
-cp out/super_secret.txt.enc ./
 
 # Clean out existing contents
 rm -rf out/**/* || exit 0
