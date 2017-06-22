@@ -40,6 +40,9 @@ exports.server = {
 
 exports.overrides = {
   production: {
+    paths: {
+        public: './dist'
+    },
     plugins: {
     	jscc: {
     		values: {
