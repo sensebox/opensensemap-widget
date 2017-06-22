@@ -23,6 +23,8 @@ cd out
 git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 cd ..
 
+cp out/super_secret.txt.enc ./
+
 # Clean out existing contents
 rm -rf out/**/* || exit 0
 
@@ -50,7 +52,7 @@ ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
 ENCRYPTED_IV_VAR="encrypted_${ENCRYPTION_LABEL}_iv"
 ENCRYPTED_KEY=${!ENCRYPTED_KEY_VAR}
 ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
-openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in super_secret.txt.enc -out super_secret.txt -d
+openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in ../super_secret.txt.enc -out super_secret.txt -d
 chmod 600 super_secret.txt
 eval `ssh-agent -s`
 ssh-add deploy_key
