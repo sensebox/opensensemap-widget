@@ -7,8 +7,8 @@
   "license": "MIT",
   "scripts": {
     "babel": "babel src -d .",
-    "watch": "babel src --watch --no-comments -d .",
-    "build": "npm run lint && babel src --minified --no-comments -d .",
+    "watch": "brunch watch --server",
+    "build": "brunch build --production",
     "lint": "eslint --fix \"src/**/*.js\""
   },
   "devDependencies": {

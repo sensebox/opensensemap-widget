@@ -3,3 +3,6 @@ node_modules
 
 public
 dist
+
+deploy_key
+super_secret.txt
