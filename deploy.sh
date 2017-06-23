@@ -52,7 +52,7 @@ ENCRYPTED_KEY=${!ENCRYPTED_KEY_VAR}
 ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
 openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in deploy_key.enc -out deploy_key -d
 ls -la
-chmod 600 super_secret.txt
+chmod 600 deploy_key
 eval `ssh-agent -s`
 ssh-add deploy_key
 
