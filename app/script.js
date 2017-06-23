@@ -2,7 +2,7 @@
 import 'babel-polyfill';
 import 'whatwg-fetch';
 
-'use strict';
+('use strict');
 
 const widget = document.querySelector('[data-sensebox-id]');
 const { senseboxId, initialTab } = widget.dataset;
@@ -564,21 +564,22 @@ const initTabs = function initTabs() {
   }
 };
 
-const changeSensorHistory = function changeSensorHistory () {
-  fetchBox()
-    .then(insertOldEntries)
-    .then(checkForNewMeasurements);
-}
+const changeSensorHistory = function changeSensorHistory() {
+  fetchBox().then(insertOldEntries).then(checkForNewMeasurements);
+};
 
-const changeSensorGraph = function changeSensorGraph () {
-  fetchBox()
-    .then(drawGraph);
-}
+const changeSensorGraph = function changeSensorGraph() {
+  fetchBox().then(drawGraph);
+};
 
-const initSelectChangeListener = function initSelectChangeListener () {
-  document.getElementById('currentsensorhistory').addEventListener('change', changeSensorHistory);
-  document.getElementById('currentsensorgraph').addEventListener('change', changeSensorGraph);
-}
+const initSelectChangeListener = function initSelectChangeListener() {
+  document
+    .getElementById('currentsensorhistory')
+    .addEventListener('change', changeSensorHistory);
+  document
+    .getElementById('currentsensorgraph')
+    .addEventListener('change', changeSensorGraph);
+};
 
 Promise.all([
   getWidgetHTML(),

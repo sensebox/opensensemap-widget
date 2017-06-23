@@ -9,7 +9,8 @@
     "babel": "babel src -d .",
     "watch": "brunch watch --server",
     "build": "brunch build --production",
-    "lint": "eslint --fix \"src/**/*.js\""
+    "lint": "eslint --fix \"app/**/*.js\"",
+    "test": "npm run lint"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
