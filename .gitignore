@@ -2,7 +2,3 @@ node_modules
 *.log
 
 public
-dist
-
-deploy_key
-super_secret.txt
