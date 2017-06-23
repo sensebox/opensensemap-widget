@@ -1,7 +1,10 @@
 language: node_js
 node_js:
 - stable
-env:
-  global:
-  - ENCRYPTION_LABEL: 7ecdcf3fc33a
-script: bash ./deploy.sh
+deploy:
+  provider: pages
+  local_dir: dist
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN # Set in travis-ci.org dashboard
+  on:
+    branch: master
