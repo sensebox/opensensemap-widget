@@ -20,7 +20,8 @@ SHA=`git rev-parse --verify HEAD`
 # Create a new empty branch if gh-pages doesn't exist yet (should only happen on first deply)
 git clone $REPO out
 cd out
-cp super_secret.txt.enc /home/travis/super_secret.txt.enc
+ls -la
+cp super_secret.txt.enc /home/travis/.ssh/super_secret.txt.enc
 git checkout $TARGET_BRANCH || git checkout --orphan $TARGET_BRANCH
 cd ..
 
@@ -51,10 +52,11 @@ ENCRYPTED_KEY_VAR="encrypted_${ENCRYPTION_LABEL}_key"
 ENCRYPTED_IV_VAR="encrypted_${ENCRYPTION_LABEL}_iv"
 ENCRYPTED_KEY=${!ENCRYPTED_KEY_VAR}
 ENCRYPTED_IV=${!ENCRYPTED_IV_VAR}
-openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in /home/travis/super_secret.txt.enc -out super_secret.txt -d
+openssl aes-256-cbc -K $ENCRYPTED_KEY -iv $ENCRYPTED_IV -in /home/travis.ssh/super_secret.txt.enc -out super_secret.txt -d
+ls -la
 chmod 600 super_secret.txt
 eval `ssh-agent -s`
-ssh-add /home/travis/super_secret.txt
+ssh-add super_secret.txt
 
 # Now that we're all set up, we can push.
 git push $SSH_REPO $TARGET_BRANCH
