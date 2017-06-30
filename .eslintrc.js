@@ -6,6 +6,9 @@ module.exports = {
   'plugins': [
     'prettier'
   ],
+  'parserOptions': {
+    'sourceType': 'module'
+  },
   'extends': [ 'eslint:recommended', 'prettier' ],
   'rules': {
     'prettier/prettier': [

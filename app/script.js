@@ -1,12 +1,14 @@
 /* global d3, MG*/
+import 'babel-polyfill';
+import 'whatwg-fetch';
 
-'use strict';
+('use strict');
 
 const widget = document.querySelector('[data-sensebox-id]');
 const { senseboxId, initialTab } = widget.dataset;
 let selectedTab;
 
-const WIDGET_BASE_URL = 'https://sensebox.de/opensensemap-widget/';
+const WIDGET_BASE_URL = '$_ADDRESS';
 const REFRESH_INTERVAL = 150000; // 2.5 minutes
 const API_BASE_URL = `https://api.opensensemap.org/boxes/${senseboxId}`;
 const DEPS_BASE_URL = 'https://unpkg.com/';
@@ -562,6 +564,23 @@ const initTabs = function initTabs() {
   }
 };
 
+const changeSensorHistory = function changeSensorHistory() {
+  fetchBox().then(insertOldEntries).then(checkForNewMeasurements);
+};
+
+const changeSensorGraph = function changeSensorGraph() {
+  fetchBox().then(drawGraph);
+};
+
+const initSelectChangeListener = function initSelectChangeListener() {
+  document
+    .getElementById('currentsensorhistory')
+    .addEventListener('change', changeSensorHistory);
+  document
+    .getElementById('currentsensorgraph')
+    .addEventListener('change', changeSensorGraph);
+};
+
 Promise.all([
   getWidgetHTML(),
   insertStylesheetWithOnloadListener(`${WIDGET_BASE_URL}style.css`)
@@ -572,6 +591,7 @@ Promise.all([
 
     applyStylesToWidgetWithJS();
     initTabs();
+    initSelectChangeListener();
     toggleTab({
       target: document.querySelector(`[data-tab-id=${initialTab || 'sensors'}]`)
     });
