@@ -565,7 +565,7 @@ const initTabs = function initTabs() {
 };
 
 const changeSensorHistory = function changeSensorHistory() {
-  fetchBox().then(insertOldEntries).then(checkForNewMeasurements);
+  fetchBox().then(insertOldEntries);
 };
 
 const changeSensorGraph = function changeSensorGraph() {
