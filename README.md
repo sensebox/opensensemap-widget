@@ -1,4 +1,4 @@
-# openSenseMap-Widget
+# openSenseMap-Widget [![Build Status](https://travis-ci.org/sensebox/opensensemap-widget.svg?branch=master)](https://travis-ci.org/sensebox/opensensemap-widget)
 
 This repository contains an embeddable widget for displaying [openSenseMap/senseBox](https://opensensemap.org) data.
 
@@ -50,3 +50,9 @@ In der URL muss `DEINE-SENSEBOXID` durch die ID deiner Box ersetzt werden, wie s
 gespeichert ist. Anschließend ist das Widget sofort auf der Seite verfügbar.
 
 Ein Beispiel, wie das Widget in der Praxis aussieht, kann man [hier](https://sensebox.de/opensensemap-widget/) begutachten.
+
+
+## Contribution
+For local development run: `npm run watch`
+
+To build the production version run: `npm run build`
