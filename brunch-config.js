@@ -6,19 +6,19 @@ exports.modules = {
 exports.files = {
 	javascripts: {
 		joinTo: {
-	  		'vendor.js': /^(?!app)/,
-	  		'script.js': /^app/
+			'vendor.js': /^(?!app)/,
+			'script.js': /^app/
 		}
 	},
-	stylesheets: {joinTo: 'style.css'}
+	stylesheets: { joinTo: 'style.css' }
 };
 
 exports.plugins = {
 	jscc: {
-      	values: {
-        	_ADDRESS: 'http://localhost:8000/'
-    	}
-    },
+		values: {
+			_ADDRESS: 'http://localhost:8000/'
+		}
+	},
 	babel: {
 		presets: [['env', {
 			targets: {
@@ -28,10 +28,10 @@ exports.plugins = {
 		}]]
 	},
 	postcss: {
-    	processors: [
-      		require('autoprefixer')(['last 8 versions']),
-    	]
-  	}
+		processors: [
+			require('autoprefixer')(['last 8 versions']),
+		]
+	}
 };
 
 exports.server = {
@@ -39,25 +39,25 @@ exports.server = {
 }
 
 exports.overrides = {
-  production: {
-    paths: {
-        public: './dist'
-    },
-    plugins: {
-    	jscc: {
-    		values: {
-    			_ADDRESS: 'https://sensebox.de/opensensemap-widget/'
-    		}
-    	},
-    	babel: {
-    		presets: [['env', {
-    			targets: {
-    				browsers: ['last 2 versions']
-    			},
-    			useBuiltIns: true
-    		}], 'babili']
-    	}
-    }
-  }
+	production: {
+		paths: {
+			public: './dist'
+		},
+		plugins: {
+			jscc: {
+				values: {
+					_ADDRESS: 'https://sensebox.github.io/opensensemap-widget/'
+				}
+			},
+			babel: {
+				presets: [['env', {
+					targets: {
+						browsers: ['last 2 versions']
+					},
+					useBuiltIns: true
+				}], 'babili']
+			}
+		}
+	}
 }
 
