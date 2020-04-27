@@ -1,8 +1,8 @@
 language: node_js
 node_js:
 - stable
-script: npm test
-after_success: npm run build
+script: yarn test
+after_success: yarn build
 deploy:
   provider: pages
   local_dir: /home/travis/build/sensebox/opensensemap-widget/dist
