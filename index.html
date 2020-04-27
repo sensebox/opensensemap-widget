@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>openSenseMap Widget</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    xmp {
+      padding: 0 10px 0 10px;
+      background-color: lightgray;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Include your openSenseMap box into your website</h1>
+  <p>How to?</p>
+  <p>
+    Paste the following HTML to your page, and replace <code>YOUR-SENSEBOX-ID</code> with your senseBox ID (you can find it in the URL from your box on opensensemap.org).
+    <br/>
+    You may optionally specify the tab to be initially selected via the <code>initialTab</code> query parameter (possible values are <code>sensors</code>, <code>history</code> and <code>graph</code>)
+  </p>
+  <xmp>
+<iframe
+  src="https://sensebox.github.io/opensensemap-widget/iframe.html?senseboxId=YOUR-SENSEBOX-ID&initialTab=sensors"
+  width="400"
+  height="600"
+  marginwidth="8" marginheight="8"
+  hspace="0" vspace="0"
+  frameborder="0"
+  scrolling="no"
+></iframe>
+  </xmp>
+
+  <p>Here is an example:</p>
+  <iframe
+    src="./iframe.html?senseboxId=58233fe540198a00100b5792"
+    width="400"
+    height="600"
+    marginwidth="8" marginheight="8"
+    hspace="0" vspace="0"
+    frameborder="0"
+    scrolling="no"
+  ></iframe>
+</body>
+
+</html>
