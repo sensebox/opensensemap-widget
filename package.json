@@ -6,7 +6,7 @@
   "author": "ubergesundheit <ubergesundheit@googlemail.com>",
   "license": "MIT",
   "scripts": {
-    "babel": "babel src -d .",
+    "babel": "babel app -d .",
     "watch": "brunch watch --server",
     "build": "brunch build --production",
     "lint": "eslint --fix \"app/**/*.js\"",
