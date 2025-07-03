@@ -325,7 +325,7 @@ const initGraphArea = function initGraphArea() {
     insertStylesheetWithOnloadListener(
       `${DEPS_BASE_URL}metrics-graphics@2.11.0/dist/metricsgraphics.css`
     ),
-    loadJSsync(['d3@4.9.1', 'metrics-graphics@2.11.0'])
+    loadJSsync(['d3@4.13.0', 'metrics-graphics@2.11.0'])
   ])
     .then(results => {
       const [sensorData] = results;
